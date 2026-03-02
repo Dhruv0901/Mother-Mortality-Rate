@@ -1,0 +1,24 @@
+2026-03-02 13:30:35,777 - model_training - DEBUG - Data loaded from ./data/raw/train.csv with shape (50, 20)
+2026-03-02 13:30:35,777 - model_training - DEBUG - Initialising RandomForest model with parameters: {'n_estimators': 350, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 12, 'random_state': 42}
+2026-03-02 13:30:35,777 - model_training - DEBUG - Model training started with 50 samples
+2026-03-02 13:30:35,777 - model_training - ERROR - ValueError during model training: Input y contains NaN.
+2026-03-02 13:30:35,777 - model_training - ERROR - Failed to complete the model building process: Input y contains NaN.
+2026-03-02 13:32:47,044 - model_training - DEBUG - Data loaded from ./data/raw/train.csv with shape (50, 20)
+2026-03-02 13:32:47,044 - model_training - DEBUG - Initialising RandomForest model with parameters: {'n_estimators': 350, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 12, 'random_state': 42}
+2026-03-02 13:32:47,044 - model_training - DEBUG - Model training started with 50 samples
+2026-03-02 13:32:47,052 - model_training - ERROR - ValueError during model training: Unknown label type: continuous. Maybe you are trying to fit a classifier, which expects discrete classes on a regression target with continuous values.
+2026-03-02 13:32:47,052 - model_training - ERROR - Failed to complete the model building process: Unknown label type: continuous. Maybe you are trying to fit a classifier, which expects discrete classes on a regression target with continuous values.
+2026-03-02 13:33:45,488 - model_training - DEBUG - Data loaded from ./data/raw/train.csv with shape (50, 20)
+2026-03-02 13:33:45,488 - model_training - DEBUG - Initialising RandomForest model with parameters: {'n_estimators': 350, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 12, 'random_state': 42}
+2026-03-02 13:33:45,488 - model_training - DEBUG - Model training started with 50 samples
+2026-03-02 13:33:45,488 - model_training - ERROR - ValueError during model training: Unknown label type: continuous. Maybe you are trying to fit a classifier, which expects discrete classes on a regression target with continuous values.
+2026-03-02 13:33:45,488 - model_training - ERROR - Failed to complete the model building process: Unknown label type: continuous. Maybe you are trying to fit a classifier, which expects discrete classes on a regression target with continuous values.
+2026-03-02 13:33:51,365 - model_training - DEBUG - Data loaded from ./data/raw/train.csv with shape (50, 20)
+2026-03-02 13:33:51,365 - model_training - DEBUG - Initialising RandomForest model with parameters: {'n_estimators': 350, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 12, 'random_state': 42}
+2026-03-02 13:33:51,365 - model_training - ERROR - Error during model training: name 'RandomForestClassifier' is not defined
+2026-03-02 13:33:51,365 - model_training - ERROR - Failed to complete the model building process: name 'RandomForestClassifier' is not defined
+2026-03-02 13:34:35,469 - model_training - DEBUG - Data loaded from ./data/raw/train.csv with shape (50, 20)
+2026-03-02 13:34:35,469 - model_training - DEBUG - Initialising RandomForest model with parameters: {'n_estimators': 350, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 12, 'random_state': 42}
+2026-03-02 13:34:35,469 - model_training - DEBUG - Model training started with 50 samples
+2026-03-02 13:34:35,947 - model_training - DEBUG - Model training completed
+2026-03-02 13:34:35,955 - model_training - DEBUG - Model saved to models/model.pkl

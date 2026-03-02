@@ -9,3 +9,6 @@
 2026-02-28 17:01:00,832 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
 2026-02-28 17:01:01,350 - data_ingestion - DEBUG - preprocessing completed
 2026-02-28 17:01:01,371 - data_ingestion - DEBUG - Train and test data saved to ./data\raw
+2026-03-02 13:32:38,557 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
+2026-03-02 13:32:39,309 - data_ingestion - DEBUG - preprocessing completed
+2026-03-02 13:32:39,326 - data_ingestion - DEBUG - Train and test data saved to ./data\raw
