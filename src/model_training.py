@@ -82,13 +82,20 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> Rando
             raise ValueError("The number of samples in X_train and y_train must be the same.")
         
         logger.debug('Initialising RandomForest model with parameters: %s', params)
-        clf = RandomForestRegressor(n_estimators=params['n_estimators'], random_state=params['random_state'])
+        m = RandomForestRegressor(
+        n_estimators=params['n_estimators'],
+        random_state=params['random_state'],
+        max_depth=params.get('max_depth', None),
+        min_samples_leaf=params.get('min_samples_leaf', 1),
+        max_features=params.get('max_features', 1.0),
+        n_jobs=-1
+    )
         
         logger.debug('Model training started with %d samples', X_train.shape[0])
-        clf.fit(X_train, y_train)
+        m.fit(X_train, y_train)
         logger.debug('Model training completed')
         
-        return clf
+        return m
     except ValueError as e:
         logger.error('ValueError during model training: %s', e)
         raise
@@ -105,7 +112,7 @@ def save_model(model, file_path: str) -> None:
     :param file_path: Path to save the model file
     """
     try:
-        # Ensure the directory exists
+        
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         
         with open(file_path, 'wb') as file:
@@ -125,10 +132,10 @@ def main():
         X_train = train_data.iloc[:, :-1].values
         y_train = train_data.iloc[:, -1].values
 
-        clf = train_model(X_train, y_train, params)
+        m = train_model(X_train, y_train, params)
         
         model_save_path = 'models/model.pkl'
-        save_model(clf, model_save_path)
+        save_model(m, model_save_path)
 
     except Exception as e:
         logger.error('Failed to complete the model building process: %s', e)

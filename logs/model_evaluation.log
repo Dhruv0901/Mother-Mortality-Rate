@@ -1,0 +1,20 @@
+2026-03-02 13:44:43,661 - model_evaluation - DEBUG - Model loaded from ./models/model.pkl
+2026-03-02 13:44:43,670 - model_evaluation - DEBUG - Data loaded from ./data/raw/test.csv
+2026-03-02 13:44:43,745 - model_evaluation - ERROR - Error during model evaluation: 'RandomForestRegressor' object has no attribute 'predict_proba'
+2026-03-02 13:44:43,745 - model_evaluation - ERROR - Failed to complete the model evaluation process: 'RandomForestRegressor' object has no attribute 'predict_proba'
+2026-03-03 12:22:36,931 - model_evaluation - DEBUG - Model loaded from ./models/model.pkl
+2026-03-03 12:22:36,932 - model_evaluation - DEBUG - Data loaded from ./data/raw/test.csv
+2026-03-03 12:22:36,932 - model_evaluation - ERROR - Error during model evaluation: name 'm' is not defined
+2026-03-03 12:22:36,932 - model_evaluation - ERROR - Failed to complete the model evaluation process: name 'm' is not defined
+2026-03-03 12:23:50,026 - model_evaluation - DEBUG - Model loaded from ./models/model.pkl
+2026-03-03 12:23:50,026 - model_evaluation - DEBUG - Data loaded from ./data/raw/test.csv
+2026-03-03 12:23:50,092 - model_evaluation - DEBUG - Model evaluation metrics calculated
+2026-03-03 12:23:50,092 - model_evaluation - DEBUG - Metrics saved to reports/metrics.json
+2026-03-03 12:31:04,708 - model_evaluation - DEBUG - Model loaded from ./models/model.pkl
+2026-03-03 12:31:04,724 - model_evaluation - DEBUG - Data loaded from ./data/raw/test.csv
+2026-03-03 12:31:04,776 - model_evaluation - DEBUG - Model evaluation metrics calculated
+2026-03-03 12:31:04,776 - model_evaluation - DEBUG - Metrics saved to reports/metrics.json
+2026-03-03 16:05:33,378 - model_evaluation - DEBUG - Model loaded from ./models/model.pkl
+2026-03-03 16:05:33,402 - model_evaluation - DEBUG - Data loaded from ./data/raw/test.csv
+2026-03-03 16:05:33,476 - model_evaluation - DEBUG - Model evaluation metrics calculated
+2026-03-03 16:05:33,476 - model_evaluation - DEBUG - Metrics saved to reports/metrics.json
