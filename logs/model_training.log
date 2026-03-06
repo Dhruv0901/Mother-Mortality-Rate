@@ -37,3 +37,63 @@
 2026-03-03 16:05:23,793 - model_training - DEBUG - Model training started with 50 samples
 2026-03-03 16:05:24,188 - model_training - DEBUG - Model training completed
 2026-03-03 16:05:24,285 - model_training - DEBUG - Model saved to models/model.pkl
+2026-03-06 23:06:51,674 - model_training - DEBUG - Data loaded from ./data/processed/train.csv with shape (50, 336)
+2026-03-06 23:06:51,694 - model_training - DEBUG - Initialising XGBRegressor model with parameters: {'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}
+2026-03-06 23:06:51,695 - model_training - DEBUG - Model training started with 50 samples
+2026-03-06 23:06:52,994 - model_training - ERROR - ValueError during model training: [23:06:52] C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-08cbc0333d8d4aae1-1\xgboost\xgboost-ci-windows\src\objective\objective.cc:31: Unknown objective function: `{'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}`
+Objective candidate: rank:ndcg
+Objective candidate: rank:pairwise
+Objective candidate: rank:map
+Objective candidate: survival:aft
+Objective candidate: binary:hinge
+Objective candidate: multi:softmax
+Objective candidate: multi:softprob
+Objective candidate: reg:quantileerror
+Objective candidate: reg:squarederror
+Objective candidate: reg:squaredlogerror
+Objective candidate: reg:logistic
+Objective candidate: binary:logistic
+Objective candidate: binary:logitraw
+Objective candidate: reg:gamma
+Objective candidate: reg:linear
+Objective candidate: reg:pseudohubererror
+Objective candidate: count:poisson
+Objective candidate: survival:cox
+Objective candidate: reg:tweedie
+Objective candidate: reg:absoluteerror
+
+2026-03-06 23:06:52,994 - model_training - ERROR - Failed to complete the model building process: [23:06:52] C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-08cbc0333d8d4aae1-1\xgboost\xgboost-ci-windows\src\objective\objective.cc:31: Unknown objective function: `{'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}`
+Objective candidate: rank:ndcg
+Objective candidate: rank:pairwise
+Objective candidate: rank:map
+Objective candidate: survival:aft
+Objective candidate: binary:hinge
+Objective candidate: multi:softmax
+Objective candidate: multi:softprob
+Objective candidate: reg:quantileerror
+Objective candidate: reg:squarederror
+Objective candidate: reg:squaredlogerror
+Objective candidate: reg:logistic
+Objective candidate: binary:logistic
+Objective candidate: binary:logitraw
+Objective candidate: reg:gamma
+Objective candidate: reg:linear
+Objective candidate: reg:pseudohubererror
+Objective candidate: count:poisson
+Objective candidate: survival:cox
+Objective candidate: reg:tweedie
+Objective candidate: reg:absoluteerror
+
+2026-03-06 23:10:24,170 - model_training - DEBUG - Data loaded from ./data/processed/train.csv with shape (50, 336)
+2026-03-06 23:10:24,170 - model_training - DEBUG - Initialising XGBRegressor model with parameters: {'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}
+2026-03-06 23:10:24,171 - model_training - DEBUG - Model training started with 50 samples
+2026-03-06 23:10:25,516 - model_training - DEBUG - Model training completed
+2026-03-06 23:10:25,531 - model_training - DEBUG - Model saved to models/model.pkl
+2026-03-06 23:21:59,687 - model_training - DEBUG - Data loaded from ./data/processed/train.csv with shape (50, 336)
+2026-03-06 23:22:17,423 - model_training - DEBUG - Data loaded from ./data/processed/train.csv with shape (50, 336)
+2026-03-06 23:22:42,718 - model_training - DEBUG - Data loaded from ./data/processed/train.csv with shape (50, 336)
+2026-03-06 23:27:57,451 - model_training - DEBUG - Data loaded from ./data/processed/train.csv with shape (50, 336)
+2026-03-06 23:27:57,451 - model_training - DEBUG - Initialising XGBRegressor model with parameters: {'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}
+2026-03-06 23:27:57,451 - model_training - DEBUG - Model training started with 50 samples
+2026-03-06 23:27:58,053 - model_training - DEBUG - Model training completed
+2026-03-06 23:27:58,067 - model_training - DEBUG - Model saved to models/model.pkl

@@ -3,7 +3,6 @@ import os
 from sklearn.model_selection import train_test_split
 import logging
 import yaml
-import random
 
 
 log_dir = 'logs'
@@ -58,18 +57,24 @@ def load_data(data_url: str) -> pd.DataFrame:
         logger.error('Unexpected error occurred while loading the data: %s', e)
         raise
 
-def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
+def preprocess_data(df: pd.DataFrame, target_variable: str) -> pd.DataFrame:
     """Preprocess the data."""
     try:
-        cleaned_data = df.fillna(df.mean())
-        correlation_matrix = cleaned_data.corr()
-        correlation_with_target = correlation_matrix['Maternal mortality ratio (modeled estimate, per 100,000 live births)'].sort_values(ascending=False)
-        all_features = correlation_with_target.index.tolist()
-        if 'year' in all_features:
-            all_features.remove('year')
-        selected_features = random.sample(all_features, min(20, len(all_features)))
-        logger.debug('preprocessing completed')
-        return cleaned_data[selected_features]
+        missing_frac = df.isna().mean()
+        cols_drop_missing = missing_frac[missing_frac > 0.50].index.tolist()
+
+        logger.debug('Columns with more than 50% missing values dropped')
+        data_reduced = df.drop(columns=cols_drop_missing)
+
+        data_for_plot = data_reduced[['year', target_variable]].copy() if 'year' in data_reduced.columns else None
+
+        data_model = data_reduced.drop(columns=['year'], errors="ignore")
+
+        data_model_imputed = data_model.fillna(data_model.mean(numeric_only=True))
+
+        logger.debug("Missing values have been imputed with mean values")
+
+        return data_model_imputed
     except KeyError as e:
         logger.error('Missing column in the dataframe: %s', e)
         raise
@@ -94,9 +99,10 @@ def main():
         # params = load_params(params_path='params.yaml')
         # test_size = params['data_ingestion']['test_size']
         test_size = 0.2
+        target_variable = "Mortality rate, adult, female (per 1,000 female adults)"
         data_path = 'D:\\MLOps\\Mother-Mortality-Rate\\experiments\\australia_economic.csv'
         df = load_data(data_url=data_path)
-        final_df = preprocess_data(df)
+        final_df = preprocess_data(df, target_variable=target_variable)
         train_data, test_data = train_test_split(final_df, test_size=test_size, random_state=42)
         save_data(train_data, test_data, data_path='./data')
     except Exception as e:

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import logging
-from sklearn.ensemble import RandomForestRegressor
+from xgboost import XGBRegressor
 import yaml
 
 
@@ -11,7 +11,7 @@ import yaml
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
 
-# logging configuration
+
 logger = logging.getLogger('model_training')
 logger.setLevel('DEBUG')
 
@@ -68,34 +68,37 @@ def load_data(file_path: str) -> pd.DataFrame:
         logger.error('Unexpected error occurred while loading the data: %s', e)
         raise
 
-def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> RandomForestRegressor:
+def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> XGBRegressor:
     """
-    Train the RandomForest model.
-    
+    Train the XGBRegressor model.
+
     :param X_train: Training features
     :param y_train: Training labels
     :param params: Dictionary of hyperparameters
-    :return: Trained RandomForestClassifier
+    :return: Trained XGBRegressor
     """
     try:
         if X_train.shape[0] != y_train.shape[0]:
             raise ValueError("The number of samples in X_train and y_train must be the same.")
         
-        logger.debug('Initialising RandomForest model with parameters: %s', params)
-        m = RandomForestRegressor(
-        n_estimators=params['n_estimators'],
-        random_state=params['random_state'],
-        max_depth=params.get('max_depth', None),
-        min_samples_leaf=params.get('min_samples_leaf', 1),
-        max_features=params.get('max_features', 1.0),
-        n_jobs=-1
-    )
+        logger.debug('Initialising XGBRegressor model with parameters: %s', params)
+        model = XGBRegressor(
+            n_estimators=params.get('model__n_estimators', 100),
+            max_depth=params.get('model__max_depth', 6),
+            learning_rate=params.get('model__learning_rate', 0.1),
+            subsample=params.get('model__subsample', 1.0),
+            colsample_bytree=params.get('model__colsample_bytree', 1.0),
+            min_child_weight=params.get('model__min_child_weight', 1),
+            random_state=42,
+            n_jobs=-1
+        )
+
         
         logger.debug('Model training started with %d samples', X_train.shape[0])
-        m.fit(X_train, y_train)
+        model.fit(X_train, y_train)
         logger.debug('Model training completed')
         
-        return m
+        return model
     except ValueError as e:
         logger.error('ValueError during model training: %s', e)
         raise
@@ -127,15 +130,15 @@ def save_model(model, file_path: str) -> None:
 
 def main():
     try:
-        params = {'n_estimators': 350, 'min_samples_leaf': 1, 'max_features': 1.0, 'max_depth': 12, 'random_state': 42}
-        train_data = load_data('./data/raw/train.csv')
+        params = {'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}
+        train_data = load_data('./data/processed/train.csv')
         X_train = train_data.iloc[:, :-1].values
         y_train = train_data.iloc[:, -1].values
 
-        m = train_model(X_train, y_train, params)
+        model = train_model(X_train, y_train, params)
         
         model_save_path = 'models/model.pkl'
-        save_model(m, model_save_path)
+        save_model(model, model_save_path)
 
     except Exception as e:
         logger.error('Failed to complete the model building process: %s', e)

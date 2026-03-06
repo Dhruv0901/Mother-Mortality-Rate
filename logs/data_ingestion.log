@@ -15,3 +15,19 @@
 2026-03-03 12:21:34,692 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
 2026-03-03 12:21:35,336 - data_ingestion - DEBUG - preprocessing completed
 2026-03-03 12:21:35,393 - data_ingestion - DEBUG - Train and test data saved to ./data\raw
+2026-03-04 14:46:15,692 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
+2026-03-04 14:46:15,692 - data_ingestion - DEBUG - Columns with more than 50% missing values dropped
+2026-03-04 14:46:15,708 - data_ingestion - ERROR - Unexpected error during preprocessing: name 'target_variable' is not defined
+2026-03-04 14:46:15,710 - data_ingestion - ERROR - Failed to complete the data ingestion process: name 'target_variable' is not defined
+2026-03-04 14:48:19,842 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
+2026-03-04 14:48:19,842 - data_ingestion - DEBUG - Columns with more than 50% missing values dropped
+2026-03-04 14:48:19,852 - data_ingestion - ERROR - Missing column in the dataframe: "['target_variable'] not in index"
+2026-03-04 14:48:19,852 - data_ingestion - ERROR - Failed to complete the data ingestion process: "['target_variable'] not in index"
+2026-03-04 14:48:48,023 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
+2026-03-04 14:48:48,207 - data_ingestion - DEBUG - Columns with more than 50% missing values dropped
+2026-03-04 14:48:48,322 - data_ingestion - DEBUG - Missing values have been imputed with mean values
+2026-03-04 14:48:48,384 - data_ingestion - DEBUG - Train and test data saved to ./data\raw
+2026-03-06 23:27:46,053 - data_ingestion - DEBUG - Data loaded from D:\MLOps\Mother-Mortality-Rate\experiments\australia_economic.csv
+2026-03-06 23:27:46,081 - data_ingestion - DEBUG - Columns with more than 50% missing values dropped
+2026-03-06 23:27:46,197 - data_ingestion - DEBUG - Missing values have been imputed with mean values
+2026-03-06 23:27:46,285 - data_ingestion - DEBUG - Train and test data saved to ./data\raw
