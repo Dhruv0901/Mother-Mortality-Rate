@@ -73,6 +73,7 @@ def main():
         logger.info(f"Train data shape: {train_processed.shape}, Test data shape: {test_processed.shape}")
         train_processed[target_variable] = train_data[target_variable]
         test_processed[target_variable] = test_data[target_variable]
+        logger.debug("Target variable added back to the processed datasets")
         save_data(train_processed, test_processed, data_path='./data')
     except Exception as e:
         logger.error('Failed to complete the data ingestion process: %s', e)
