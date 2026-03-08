@@ -11,11 +11,11 @@ stages:
       params.yaml:
         data_ingestion.target_variable: Mortality rate, adult, female (per 1,000
           female adults)
-        data_ingestion.test_size: 0.2
+        data_ingestion.test_size: 0.3
     outs:
     - path: data/raw
       hash: md5
-      md5: effc33a7e84a980453f41fa561655c93.dir
+      md5: 36a88c6ddc86dd71483114e71d402cfe.dir
       size: 530047
       nfiles: 2
   feature_selection:
@@ -23,7 +23,7 @@ stages:
     deps:
     - path: data/raw
       hash: md5
-      md5: effc33a7e84a980453f41fa561655c93.dir
+      md5: 36a88c6ddc86dd71483114e71d402cfe.dir
       size: 530047
       nfiles: 2
     - path: src/feature_selection.py
@@ -38,16 +38,16 @@ stages:
     outs:
     - path: data/processed
       hash: md5
-      md5: 5426295786af221ee8ff15b79310d0c7.dir
-      size: 319768
+      md5: 672e8935884b7811d78b11eab531b6a5.dir
+      size: 321051
       nfiles: 2
   model_training:
     cmd: python src/model_training.py
     deps:
     - path: data/processed
       hash: md5
-      md5: 5426295786af221ee8ff15b79310d0c7.dir
-      size: 319768
+      md5: 672e8935884b7811d78b11eab531b6a5.dir
+      size: 321051
       nfiles: 2
     - path: src/model_training.py
       hash: md5
@@ -66,21 +66,21 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 34562c4056a9c96f1fb7fbd930d14806
-      size: 310572
+      md5: 39100601f4cb308bfb80125da7c277e7
+      size: 304940
   model_evaluation:
     cmd: python src/model_evaluation.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: 34562c4056a9c96f1fb7fbd930d14806
-      size: 310572
+      md5: 39100601f4cb308bfb80125da7c277e7
+      size: 304940
     - path: src/model_evaluation.py
       hash: md5
-      md5: 5fd1cabab6f7dc61791b34297a165953
-      size: 4366
+      md5: a4162c83df6e40dd8138dcdfde840a70
+      size: 4413
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: 960162f26e72bd322f476f874df92306
-      size: 151
+      md5: 6ce05b384caaeb4162fb781d86b2cae2
+      size: 154
