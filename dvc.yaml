@@ -3,8 +3,9 @@ stages:
     cmd: python src/data_ingestion.py
     deps:
     - src/data_ingestion.py
-    # params:
-    # - data_ingestion.test_size
+    params:
+    - data_ingestion.test_size
+    - data_ingestion.target_variable
     outs:
     - data/raw
   feature_selection:
@@ -12,6 +13,10 @@ stages:
     deps:
     - data/raw
     - src/feature_selection.py
+    params:
+    - feature_selection.TOP_K
+    - feature_selection.MIN_ABS_CORR
+    - feature_selection.CORR_METHOD
     outs:
     - data/processed
   model_training:
@@ -19,9 +24,15 @@ stages:
     deps:
     - data/processed
     - src/model_training.py
-    # params:
-    # - model_training.n_estimators
-    # - model_training.random_state
+    params:
+    - model_training.model_subsample
+    - model_training.model_n_estimators
+    - model_training.model_min_child_weight
+    - model_training.model_max_depth
+    - model_training.model_learning_rate
+    - model_training.model_colsample_bytree
+    - model_training.random_state
+    - model_training.n_jobs
     outs:
     - models/model.pkl
   model_evaluation:

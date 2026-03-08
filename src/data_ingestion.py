@@ -96,10 +96,9 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 
 def main():
     try:
-        # params = load_params(params_path='params.yaml')
-        # test_size = params['data_ingestion']['test_size']
-        test_size = 0.2
-        target_variable = "Mortality rate, adult, female (per 1,000 female adults)"
+        params = load_params(params_path='params.yaml')
+        test_size = params['data_ingestion']['test_size']
+        target_variable = params['data_ingestion']['target_variable']
         data_path = 'D:\\MLOps\\Mother-Mortality-Rate\\experiments\\australia_economic.csv'
         df = load_data(data_url=data_path)
         final_df = preprocess_data(df, target_variable=target_variable)

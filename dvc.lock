@@ -5,8 +5,13 @@ stages:
     deps:
     - path: src/data_ingestion.py
       hash: md5
-      md5: a59e87b6dcb4299812830e5fa26b1211
-      size: 4134
+      md5: e256e788772871314a7e7d0f060ffac5
+      size: 4091
+    params:
+      params.yaml:
+        data_ingestion.target_variable: Mortality rate, adult, female (per 1,000
+          female adults)
+        data_ingestion.test_size: 0.2
     outs:
     - path: data/raw
       hash: md5
@@ -23,38 +28,53 @@ stages:
       nfiles: 2
     - path: src/feature_selection.py
       hash: md5
-      md5: 40cb215b5479548db4f72e70d0248e71
-      size: 3554
+      md5: 2bdba54c42a86514a212d19032c4ce42
+      size: 4282
+    params:
+      params.yaml:
+        feature_selection.CORR_METHOD: spearman
+        feature_selection.MIN_ABS_CORR: 0.35
+        feature_selection.TOP_K: 30
     outs:
     - path: data/processed
       hash: md5
-      md5: a8cd231dde34226475479221f8db6c43.dir
-      size: 285101
+      md5: 5426295786af221ee8ff15b79310d0c7.dir
+      size: 319768
       nfiles: 2
   model_training:
     cmd: python src/model_training.py
     deps:
     - path: data/processed
       hash: md5
-      md5: a8cd231dde34226475479221f8db6c43.dir
-      size: 285101
+      md5: 5426295786af221ee8ff15b79310d0c7.dir
+      size: 319768
       nfiles: 2
     - path: src/model_training.py
       hash: md5
-      md5: 28948ac667b63ef32abe2962b9c91f5e
-      size: 4836
+      md5: 4c76d93136a811df11c585856caf16d0
+      size: 4735
+    params:
+      params.yaml:
+        model_training.model_colsample_bytree: 0.85
+        model_training.model_learning_rate: 0.01
+        model_training.model_max_depth: 3
+        model_training.model_min_child_weight: 3
+        model_training.model_n_estimators: 300
+        model_training.model_subsample: 0.7
+        model_training.n_jobs: -5
+        model_training.random_state: 42
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 6a9b7efa9723673b254d281ae8627bbf
-      size: 311393
+      md5: 34562c4056a9c96f1fb7fbd930d14806
+      size: 310572
   model_evaluation:
     cmd: python src/model_evaluation.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: 6a9b7efa9723673b254d281ae8627bbf
-      size: 311393
+      md5: 34562c4056a9c96f1fb7fbd930d14806
+      size: 310572
     - path: src/model_evaluation.py
       hash: md5
       md5: 5fd1cabab6f7dc61791b34297a165953
@@ -62,5 +82,5 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: 5973392215057e14202deb333c1bcc3a
-      size: 153
+      md5: 960162f26e72bd322f476f874df92306
+      size: 151

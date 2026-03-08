@@ -29,22 +29,22 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
-# def load_params(params_path: str) -> dict:
-#     """Load parameters from a YAML file."""
-#     try:
-#         with open(params_path, 'r') as file:
-#             params = yaml.safe_load(file)
-#         logger.debug('Parameters retrieved from %s', params_path)
-#         return params
-#     except FileNotFoundError:
-#         logger.error('File not found: %s', params_path)
-#         raise
-#     except yaml.YAMLError as e:
-#         logger.error('YAML error: %s', e)
-#         raise
-#     except Exception as e:
-#         logger.error('Unexpected error: %s', e)
-#         raise
+def load_params(params_path: str) -> dict:
+    """Load parameters from a YAML file."""
+    try:
+        with open(params_path, 'r') as file:
+            params = yaml.safe_load(file)
+        logger.debug('Parameters retrieved from %s', params_path)
+        return params
+    except FileNotFoundError:
+        logger.error('File not found: %s', params_path)
+        raise
+    except yaml.YAMLError as e:
+        logger.error('YAML error: %s', e)
+        raise
+    except Exception as e:
+        logger.error('Unexpected error: %s', e)
+        raise
 
 
 def load_data(file_path: str) -> pd.DataFrame:
@@ -83,14 +83,14 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> XGBRe
         
         logger.debug('Initialising XGBRegressor model with parameters: %s', params)
         model = XGBRegressor(
-            n_estimators=params.get('model__n_estimators', 100),
-            max_depth=params.get('model__max_depth', 6),
-            learning_rate=params.get('model__learning_rate', 0.1),
-            subsample=params.get('model__subsample', 1.0),
-            colsample_bytree=params.get('model__colsample_bytree', 1.0),
-            min_child_weight=params.get('model__min_child_weight', 1),
-            random_state=42,
-            n_jobs=-1
+            n_estimators=params.get('model_n_estimators', 100),
+            max_depth=params.get('model_max_depth', 6),
+            learning_rate=params.get('model_learning_rate', 0.1),
+            subsample=params.get('model_subsample', 1.0),
+            colsample_bytree=params.get('model_colsample_bytree', 1.0),
+            min_child_weight=params.get('model_min_child_weight', 1),
+            random_state=params.get('random_state', 42),
+            n_jobs=params.get('n_jobs', -1)
         )
 
         
@@ -130,7 +130,7 @@ def save_model(model, file_path: str) -> None:
 
 def main():
     try:
-        params = {'model__subsample': 0.7, 'model__n_estimators': 300, 'model__min_child_weight': 3, 'model__max_depth': 3, 'model__learning_rate': 0.01, 'model__colsample_bytree': 0.85}
+        params = load_params(params_path='params.yaml')['model_training']
         train_data = load_data('./data/processed/train.csv')
         X_train = train_data.iloc[:, :-1].values
         y_train = train_data.iloc[:, -1].values

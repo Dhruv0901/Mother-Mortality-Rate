@@ -23,8 +23,24 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
+def load_params(params_path: str) -> dict:
+    """Load parameters from a YAML file."""
+    try:
+        with open(params_path, 'r') as file:
+            params = yaml.safe_load(file)
+        logger.debug('Parameters retrieved from %s', params_path)
+        return params
+    except FileNotFoundError:
+        logger.error('File not found: %s', params_path)
+        raise
+    except yaml.YAMLError as e:
+        logger.error('YAML error: %s', e)
+        raise
+    except Exception as e:
+        logger.error('Unexpected error: %s', e)
+        raise
 
-def data_selection(data_model_imputed: pd.DataFrame, target_variable: str, TOP_K = 30, MIN_ABS_CORR = 0.35, CORR_METHOD = "pearson") -> list:
+def data_selection(data_model_imputed: pd.DataFrame, target_variable: str, TOP_K: int, MIN_ABS_CORR: float, CORR_METHOD: str ) -> list:
     """Select features based on correlation with the target variable"""
     corr_series = (
         data_model_imputed
@@ -64,8 +80,9 @@ def main():
     try:
         train_data = pd.read_csv('./data/raw/train.csv')
         test_data = pd.read_csv('./data/raw/test.csv')
-        target_variable = "Mortality rate, adult, female (per 1,000 female adults)"
-        selected_features = data_selection(train_data, target_variable)
+        params = load_params(params_path='params.yaml')
+        target_variable = params['data_ingestion']['target_variable']
+        selected_features = data_selection(train_data, target_variable, params['feature_selection']['TOP_K'], params['feature_selection']['MIN_ABS_CORR'], params['feature_selection']['CORR_METHOD'])
         logger.info(f"Selected {len(selected_features)} features from training data")
         train_processed = train_data[selected_features].copy()
         test_processed = test_data[selected_features].copy()
